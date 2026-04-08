@@ -14,6 +14,9 @@ materi yang telah diperoleh pada kelas teori!
 Solusi Terhadap Masalah: Tuliskan solusi berupa source code 
 dan penjelasan solusi terhadap masalah tersebut! Berikan 
 penjelasannya pada setiap bagian source code!
+    di kode ini, masalah bisa diselesaikan dengan memastika lock ordering pada thread melalui alur yang sama
+    dengan synchronized (acc1) terus synchronized (acc2) pada kedua thread, dengan ini thread kedua akan
+    langsung ke mengerjakan acc1 ketika thread 1 selesai dengan acc1, adn seterusnya pada acc2.
 
 */
 
