@@ -62,8 +62,8 @@ public class TransferFulus {
         t1.start();
         t2.start();
 
-        t1.join();
-        t2.join();
+        t1.join(); //memastikan t1 selesai sebelum lanjut ke kode di bawah
+        t2.join(); //memastikan t2 selesai --//--
 
         System.out.println("--- HASIL AKHIR ---");
         System.out.println("Saldo Akhir acc1: " + acc1.balance);
