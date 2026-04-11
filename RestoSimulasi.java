@@ -2,40 +2,48 @@
 Analisis Masalah: Perhatikan source code di bawah ini, masalah apa yang Anda temukan? 
 Berikan penjelasannya pada setiap bagian source code dengan menyeluruh berdasarkan 
 materi yang telah diperoleh pada kelas teori!
+race condition, 3 thread kasir berjalan secara bersamaan, dan tidak ada mekanisme sinkronisasi.
+thread.sleep memperparah kondisi karena disimpan dalam if, sehingga 3 thread bisa masuk walaupun stok tinggal 1.
+increment tidak aman karena tidak atomic, sehingga bisa terjadi kesalahan data. 
 
 Solusi Terhadap Masalah: Tuliskan solusi berupa source code dan penjelasan 
 solusi terhadap masalah tersebut! Berikan penjelasannya pada 
 setiap bagian source code!
+setiap operasi increment dilakukan dengan AtomicInteger, sehingga operasi menjadi atomic dan thread-safe.
+thread.sleep dihapus untuk menghindari kondisi dimana 3 thread bisa masuk walaupun stok tinggal 1.
+
 */
+import java.util.concurrent.atomic.AtomicInteger;
 
 class Resto {
-    private int chickenStock = 100;
-    private int chickensold = 0;
-    private int executions = 0;
-
+    private AtomicInteger chickenStock = new AtomicInteger(100);
+    private AtomicInteger chickensold = new AtomicInteger(0);
+    private AtomicInteger executions = new AtomicInteger(0);
+    
     public void serveCustomer(String cashierName) {
-        executions += 1;
-            if (chickenStock > 0) {
-                try { Thread.sleep(10); } catch (InterruptedException e) {}
+        executions.incrementAndGet(); 
+
+        try { Thread.sleep(10); } catch (InterruptedException e) {}
+            if (chickenStock.get() > 0) {
                 
-                chickenStock--; 
-                System.out.println(cashierName + " berhasil menjual 1 ayam. Sisa stok: " + chickenStock);
-                chickensold += 1;
+                chickenStock.decrementAndGet();
+                System.out.println(cashierName + " berhasil menjual 1 ayam. Sisa stok: " + chickenStock.get());
+                chickensold.incrementAndGet();
             } else {
                 System.out.println(cashierName + " gagal: Stok Habis!");
         }
     }
 
     public int getRemainingStock() {
-        return chickenStock;
+        return chickenStock.get();
     }
 
     public int getChickenSold(){
-        return chickensold;
+        return chickensold.get();
     }
 
     public int getExecutions(){
-        return executions;
+        return executions.get();
     }
 }
 
