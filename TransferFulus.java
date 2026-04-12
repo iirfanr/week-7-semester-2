@@ -1,25 +1,3 @@
-/*Instruksi Pengerjaan:
-Analisis Masalah: Perhatikan source code di bawah ini,
-masalah apa yang Anda temukan? Berikan penjelasannya pada 
-setiap bagian source code dengan menyeluruh berdasarkan 
-materi yang telah diperoleh pada kelas teori!
-    Terjadi deadlock pada kedua thread.
-    kedua thread dipanggil dan melakukan synchronized.
-    thread pertama mengunci acc1 dan sleep selama 100ms,
-    dan thread kedua mengunci acc2 dan sleep selama 100ms,
-    thread pertama ingin menggunakan acc2 sedangkan thread kedua
-    ingin menggunakan acc1,  karena keduanya terkunci, thread tidak
-    dapat melanjutkannya dan terjadi deadlock.
-
-Solusi Terhadap Masalah: Tuliskan solusi berupa source code 
-dan penjelasan solusi terhadap masalah tersebut! Berikan 
-penjelasannya pada setiap bagian source code!
-    di kode ini, masalah bisa diselesaikan dengan memastika lock ordering pada thread melalui alur yang sama
-    dengan synchronized (acc1) terus synchronized (acc2) pada kedua thread, dengan ini thread kedua akan
-    langsung ke mengerjakan acc1 ketika thread 1 selesai dengan acc1, adn seterusnya pada acc2.
-
-*/
-
 class Account {
     int balance = 150;
 }
