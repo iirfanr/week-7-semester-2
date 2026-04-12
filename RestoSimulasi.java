@@ -10,7 +10,7 @@ Solusi Terhadap Masalah: Tuliskan solusi berupa source code dan penjelasan
 solusi terhadap masalah tersebut! Berikan penjelasannya pada 
 setiap bagian source code!
 setiap operasi increment dilakukan dengan AtomicInteger, sehingga operasi menjadi atomic dan thread-safe.
-thread.sleep dihapus untuk menghindari kondisi dimana 3 thread bisa masuk walaupun stok tinggal 1.
+thread.sleep dipindah keluar if statement untuk menghindari kondisi dimana 3 thread bisa masuk walaupun stok tinggal 1.
 
 */
 import java.util.concurrent.atomic.AtomicInteger;
